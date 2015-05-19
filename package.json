@@ -1,0 +1,32 @@
+{
+  "name": "hydrazine",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "The Polymer Authors",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "gulp-crisper": "0.0.4",
+    "gulp-html-minifier": "^0.1.6",
+    "gulp-rename": "^1.2.2",
+    "gulp-vulcanize": "^6.0.0",
+    "lazypipe": "^0.2.3",
+    "polyclean": "0.0.1",
+    "vinyl-fs": "^1.0.0"
+  },
+  "directories": {
+    "example": "example"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PolymerLabs/hydrazine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PolymerLabs/hydrazine/issues"
+  },
+  "homepage": "https://github.com/PolymerLabs/hydrazine#readme",
+  "description": ""
+}
