@@ -25,4 +25,7 @@ vfs.src([source])
   .pipe(vfs.dest(
     path.dirname(source)
   ))
+  .on('error', function(err) {
+    throw err;
+  })
 ;

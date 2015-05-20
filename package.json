@@ -6,14 +6,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "The Polymer Authors",
-  "license": "BSD-2-Clause",
+  "license": "BSD-3-Clause",
   "dependencies": {
     "gulp-crisper": "0.0.4",
-    "gulp-html-minifier": "^0.1.6",
     "gulp-rename": "^1.2.2",
     "gulp-vulcanize": "^6.0.0",
     "lazypipe": "^0.2.3",
-    "polyclean": "0.0.1",
+    "polyclean": "^1.0.0",
     "vinyl-fs": "^1.0.0"
   },
   "directories": {

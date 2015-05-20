@@ -16,7 +16,6 @@ var lazypipe = require('lazypipe');
 var polyclean = require('polyclean');
 var rename = require('gulp-rename');
 var vulcanize = require('gulp-vulcanize');
-var htmlmin = require('gulp-html-minifier');
 
 module.exports = lazypipe()
   .pipe(vulcanize, {
@@ -24,15 +23,7 @@ module.exports = lazypipe()
     inlineCss: true,
     stripComments: true
   })
-  .pipe(htmlmin, {
-    ignoreCustomComments: [/@license/],
-    collapseWhitespace: true,
-    conservativeCollapse: true,
-    removeComments: true
-  })
-  .pipe(polyclean.cleanJsComments)
-  // .pipe(polyclean.uglifyJs)
-  // .pipe(polyclean.cleanCss)
+  .pipe(polyclean.uglifyJs)
   .pipe(crisper)
   .pipe(rename, function(path) {
     path.basename += '.build';
