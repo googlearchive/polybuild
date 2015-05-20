@@ -12,7 +12,7 @@
 // jshint node: true
 var path = require('path');
 var vfs = require('vinyl-fs');
-var hydrazine = require('../index');
+var polybuild = require('../index');
 
 var source = process.argv[2];
 
@@ -21,7 +21,7 @@ if (!source) {
 }
 
 vfs.src([source])
-  .pipe(hydrazine())
+  .pipe(polybuild())
   .pipe(vfs.dest(
     path.dirname(source)
   ))
