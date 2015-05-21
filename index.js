@@ -17,15 +17,34 @@ var polyclean = require('polyclean');
 var rename = require('gulp-rename');
 var vulcanize = require('gulp-vulcanize');
 
-module.exports = lazypipe()
+var htmlPipe = lazypipe()
   .pipe(vulcanize, {
     inlineScripts: true,
     inlineCss: true,
     stripComments: true
   })
-  .pipe(polyclean.uglifyJs)
-  .pipe(crisper)
-  .pipe(rename, function(path) {
+  .pipe(polyclean.cleanCss)
+;
+
+var cleanJsPipe = lazypipe()
+  .pipe(polyclean.cleanJsComments)
+  .pipe(polyclean.leftAlignJs)
+;
+
+var uglifyPipe = polyclean.uglifyJs;
+
+var renamePipe = lazypipe()
+  .pipe(rename, function(path){
     path.basename += '.build';
   })
 ;
+
+module.exports = function(opts) {
+  opts = opts || {};
+  var crush = opts.maximumCrush;
+  return htmlPipe
+  .pipe(crush ? uglifyPipe : cleanJsPipe)
+  .pipe(renamePipe)
+  .pipe(crisper)
+();
+};

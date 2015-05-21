@@ -1,11 +1,13 @@
 # Polybuild
 > An all-in-one build tool for Polymer apps
 
-Polybuild combines [vulcanize](npmjs.com/package/vulcanize), [crisper](npmjs.com/package/crisper), and [polyclean](npmjs.com/package/polyclean) into one easy to use solution for optimizing Polymer applications for production.
+Polybuild combines [vulcanize](http://npmjs.com/package/vulcanize), [crisper](http://npmjs.com/package/crisper), and [polyclean](http://npmjs.com/package/polyclean) into one easy to use solution for optimizing Polymer applications for production.
 
 Polybuild exposes a gulp plugin, and a small command line tool to fit your build environment.
 
-Polybuild has no customizations or options. If you have a more advanced use case than is provided, please copy the equivalent portions of the command line or gulp internals as a starting point.
+PolyBuild has only one option: "maximum crush". This option affects whether the output javascript is minified, or only has whitespace removed.
+
+If you have a more advanced use case than is provided, please copy the equivalent portions of the command line or gulp internals as a starting point.
 
 
 ## Command Line Tool
@@ -17,7 +19,7 @@ npm install -g polybuild
 
 Use:
 ```
-polybuild index.html
+polybuild --[no-]maximum-crush index.html
 ```
 
 Output: `index.build.html` and `index.build.js`
@@ -42,7 +44,9 @@ var polybuild = require('polybuild');
 
 gulp.task('build', function() {
   return gulp.src('index.html')
-  .pipe(polybuild())
+  .pipe(polybuild({
+    maximumCrush: true || false;
+  }))
   .pipe(gulp.dest('.'))
 ;
 })

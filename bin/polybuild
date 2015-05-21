@@ -10,18 +10,31 @@
  */
 
 // jshint node: true
+'use strict';
+
 var path = require('path');
 var vfs = require('vinyl-fs');
 var polybuild = require('../index');
+var nopt = require('nopt');
 
-var source = process.argv[2];
+var args = nopt(
+  {
+    'maximum-crush': Boolean
+  },
+  {
+    'mc': ['--maximum-crush']
+  }
+);
+
+var maximumCrush = args['maximum-crush'];
+var source = args.argv.remain[0];
 
 if (!source) {
   throw 'Missing input file';
 }
 
 vfs.src([source])
-  .pipe(polybuild())
+  .pipe(polybuild({maximumCrush: maximumCrush}))
   .pipe(vfs.dest(
     path.dirname(source)
   ))
