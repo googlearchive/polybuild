@@ -5,6 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "polybuild": "./bin/polybuild"
+  },
   "author": "The Polymer Authors",
   "license": "BSD-3-Clause",
   "dependencies": {
