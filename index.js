@@ -18,23 +18,30 @@ var rename = require('gulp-rename');
 var vulcanize = require('gulp-vulcanize');
 
 var htmlPipe = lazypipe()
+  // inline html imports, scripts and css
+  // also remove html comments
   .pipe(vulcanize, {
     inlineScripts: true,
     inlineCss: true,
     stripComments: true
   })
+  // remove whitespace from inline css
   .pipe(polyclean.cleanCss)
 ;
 
 var cleanJsPipe = lazypipe()
+  // remove javascript comments
   .pipe(polyclean.cleanJsComments)
+  // remove javascript whitespace
   .pipe(polyclean.leftAlignJs)
 ;
 
+// minimize javascript with uglifyjs
 var uglifyPipe = polyclean.uglifyJs;
 
+// rename files with an infix '.build'
 var renamePipe = lazypipe()
-  .pipe(rename, function(path){
+  .pipe(rename, function(path) {
     path.basename += '.build';
   })
 ;
@@ -43,8 +50,10 @@ module.exports = function(opts) {
   opts = opts || {};
   var crush = opts.maximumCrush;
   return htmlPipe
-  .pipe(crush ? uglifyPipe : cleanJsPipe)
-  .pipe(renamePipe)
-  .pipe(crisper)
-();
+    // switch between cleaning or minimizing javascript
+    .pipe(crush ? uglifyPipe : cleanJsPipe)
+    .pipe(renamePipe)
+    // split the javascript out into `.build.js` for CSP compliance
+    .pipe(crisper)
+    ();
 };
