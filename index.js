@@ -29,15 +29,11 @@ var htmlPipe = lazypipe()
   .pipe(polyclean.cleanCss)
 ;
 
-var cleanJsPipe = lazypipe()
-  // remove javascript comments
-  .pipe(polyclean.cleanJsComments)
   // remove javascript whitespace
-  .pipe(polyclean.leftAlignJs)
-;
+var leftAlign = polyclean.leftAlignJs;
 
 // minimize javascript with uglifyjs
-var uglifyPipe = polyclean.uglifyJs;
+var uglify = polyclean.uglifyJs;
 
 // rename files with an infix '.build'
 var renamePipe = lazypipe()
@@ -51,7 +47,7 @@ module.exports = function(opts) {
   var crush = opts.maximumCrush;
   return htmlPipe
     // switch between cleaning or minimizing javascript
-    .pipe(crush ? uglifyPipe : cleanJsPipe)
+    .pipe(crush ? uglify : leftAlign)
     .pipe(renamePipe)
     // split the javascript out into `.build.js` for CSP compliance
     .pipe(crisper)

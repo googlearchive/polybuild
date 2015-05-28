@@ -1,6 +1,6 @@
 {
   "name": "polybuild",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +16,7 @@
     "gulp-vulcanize": "^6.0.0",
     "lazypipe": "^0.2.3",
     "nopt": "^3.0.2",
-    "polyclean": "^1.1.0",
+    "polyclean": "^1.2.0",
     "vinyl-fs": "^1.0.0"
   },
   "directories": {
