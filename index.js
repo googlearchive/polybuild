@@ -16,6 +16,7 @@ var lazypipe = require('lazypipe');
 var polyclean = require('polyclean');
 var rename = require('gulp-rename');
 var vulcanize = require('gulp-vulcanize');
+var gutil = require('gulp-util');
 
 var htmlPipe = lazypipe()
   // inline html imports, scripts and css
@@ -35,21 +36,26 @@ var leftAlign = polyclean.leftAlignJs;
 // minimize javascript with uglifyjs
 var uglify = polyclean.uglifyJs;
 
-// rename files with an infix '.build'
-var renamePipe = lazypipe()
-  .pipe(rename, function(path) {
-    path.basename += '.build';
-  })
-;
-
 module.exports = function(opts) {
   opts = opts || {};
   var crush = opts.maximumCrush;
-  return htmlPipe
-    // switch between cleaning or minimizing javascript
-    .pipe(crush ? uglify : leftAlign)
-    .pipe(renamePipe)
-    // split the javascript out into `.build.js` for CSP compliance
-    .pipe(crisper)
-    ();
+  var pipe = htmlPipe
+  // switch between cleaning or minimizing javascript
+  .pipe(crush ? uglify : leftAlign)
+  // rename files with an infix '.build'
+  .pipe(rename, function(path) {
+    path.basename += '.build';
+  })
+  // split the javascript out into `.build.js` for CSP compliance
+  .pipe(crisper)
+  ()
+  ;
+
+  // have to handle errors ourselves, thanks gulp >:(
+  pipe.on('error', function(error) {
+    gutil.log(error.toString());
+    process.exit(1);
+  });
+
+  return pipe;
 };

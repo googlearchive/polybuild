@@ -16,6 +16,7 @@ var path = require('path');
 var vfs = require('vinyl-fs');
 var polybuild = require('../index');
 var nopt = require('nopt');
+var gutil = require('gulp-util');
 
 var args = nopt(
   {
@@ -38,7 +39,7 @@ vfs.src([source])
   .pipe(vfs.dest(
     path.dirname(source)
   ))
-  .on('error', function(err) {
-    throw err;
+  .on('error', function() {
+    process.exit(1);
   })
 ;
