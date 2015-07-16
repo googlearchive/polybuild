@@ -5,11 +5,6 @@ Polybuild combines [vulcanize](http://npmjs.com/package/vulcanize), [crisper](ht
 
 Polybuild exposes a gulp plugin, and a small command line tool to fit your build environment.
 
-PolyBuild has only one option: "maximum crush". This option affects whether the output javascript is minified, or only has whitespace removed.
-
-If you have a more advanced use case than is provided, please copy the equivalent portions of the command line or gulp internals as a starting point.
-
-
 ## Command Line Tool
 
 Install:
@@ -19,7 +14,7 @@ npm install -g polybuild
 
 Use:
 ```
-polybuild --[no-]maximum-crush index.html
+polybuild index.html
 ```
 
 Output: `index.build.html` and `index.build.js`
@@ -44,9 +39,7 @@ var polybuild = require('polybuild');
 
 gulp.task('build', function() {
   return gulp.src('index.html')
-  .pipe(polybuild({
-    maximumCrush: true || false;
-  }))
+  .pipe(polybuild())
   .pipe(gulp.dest('.'))
 ;
 })
@@ -55,3 +48,25 @@ gulp.task('build', function() {
 Output: `index.build.html` and `index.build.js`
 
 The equivalent `gulp` pipeline is found in [index.js](https://github.com/PolymerLabs/polybuild/tree/master/index.js)
+
+
+## Options
+
+PolyBuild has only one option: "maximum crush". This option affects whether the output javascript is minified, or only has whitespace removed.
+
+If you have a more advanced use case than is provided, please copy the equivalent portions of the command line or gulp internals as a starting point.
+
+To use "maximum crush" on the command line add the flag `--maximum-crush`
+
+```
+polybuild --maximum-crush index.html
+```
+
+To use "maximum crush" in gulp, use the option
+
+```javascript
+//...
+.pipe(polybuild({maximumCrush: true})
+//...
+```
+
