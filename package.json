@@ -13,6 +13,7 @@
   "dependencies": {
     "gulp-crisper": "0.0.4",
     "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.6",
     "gulp-vulcanize": "^6.0.0",
     "lazypipe": "^0.2.3",
     "nopt": "^3.0.2",
