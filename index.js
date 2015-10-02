@@ -39,12 +39,13 @@ var uglify = polyclean.uglifyJs;
 module.exports = function(opts) {
   opts = opts || {};
   var crush = opts.maximumCrush;
+  var suffix = opts.suffix ? '.' + opts.suffix.split('.').join('') : undefined;
   var pipe = htmlPipe
   // switch between cleaning or minimizing javascript
   .pipe(crush ? uglify : leftAlign)
   // rename files with an infix '.build'
   .pipe(rename, function(path) {
-    path.basename += '.build';
+    path.basename += suffix ? suffix : '.build';
   })
   // split the javascript out into `.build.js` for CSP compliance
   .pipe(crisper)
