@@ -52,7 +52,7 @@ The equivalent `gulp` pipeline is found in [index.js](https://github.com/Polymer
 
 ## Options
 
-PolyBuild has only one option: "maximum crush". This option affects whether the output javascript is minified, or only has whitespace removed.
+PolyBuild has two options: "maximum crush" and "suffix". First option affects whether the output javascript is minified, or only has whitespace removed, second option needed if you want change default "build" suffix.
 
 If you have a more advanced use case than is provided, please copy the equivalent portions of the command line or gulp internals as a starting point.
 
@@ -62,11 +62,11 @@ To use "maximum crush" on the command line add the flag `--maximum-crush`
 polybuild --maximum-crush index.html
 ```
 
-To use "maximum crush" in gulp, use the option
+You can use options in gulp, like in this example
 
 ```javascript
 //...
-.pipe(polybuild({maximumCrush: true})
+.pipe(polybuild({maximumCrush: true, suffix: 'build'})
 //...
 ```
 
