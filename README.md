@@ -56,10 +56,10 @@ PolyBuild has two options: "maximum crush" and "suffix". First option affects wh
 
 If you have a more advanced use case than is provided, please copy the equivalent portions of the command line or gulp internals as a starting point.
 
-To use "maximum crush" on the command line add the flag `--maximum-crush`
+Example of options usage on the command line with flags:
 
 ```
-polybuild --maximum-crush index.html
+polybuild index.html --maximum-crush --suffix customsuffix
 ```
 
 You can use options in gulp, like in this example
@@ -69,4 +69,3 @@ You can use options in gulp, like in this example
 .pipe(polybuild({maximumCrush: true, suffix: 'build'})
 //...
 ```
-
