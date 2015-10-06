@@ -61,6 +61,7 @@ Example of options usage on the command line with flags:
 ```
 polybuild index.html --maximum-crush --suffix customsuffix
 ```
+which will output the file `index.customsuffix.html`
 
 You can use options in gulp, like in this example
 
