@@ -30,7 +30,7 @@ var htmlPipe = lazypipe()
   .pipe(polyclean.cleanCss)
 ;
 
-  // remove javascript whitespace
+// remove javascript whitespace
 var leftAlign = polyclean.leftAlignJs;
 
 // minimize javascript with uglifyjs
