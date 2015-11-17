@@ -11,14 +11,14 @@
   "author": "The Polymer Authors",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "gulp-crisper": "0.0.4",
+    "gulp-crisper": "^1.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-util": "^3.0.6",
-    "gulp-vulcanize": "^6.0.0",
-    "lazypipe": "^0.2.3",
-    "nopt": "^3.0.2",
+    "gulp-util": "^3.0.7",
+    "gulp-vulcanize": "^6.1.0",
+    "lazypipe": "^1.0.1",
+    "nopt": "^3.0.6",
     "polyclean": "^1.2.0",
-    "vinyl-fs": "^1.0.0"
+    "vinyl-fs": "^2.2.1"
   },
   "directories": {
     "example": "example"
