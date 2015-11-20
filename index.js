@@ -39,7 +39,12 @@ var uglify = polyclean.uglifyJs;
 module.exports = function(opts) {
   opts = opts || {};
   var crush = opts.maximumCrush;
+  
   var suffix = opts.suffix ? '.' + opts.suffix.split('.').join('') : '.build';
+  if(opts.suffix === false || opts.suffix === ""){ //no suffix option
+    suffix = "";
+  }
+  
   var pipe = htmlPipe
   // switch between cleaning or minimizing javascript
   .pipe(crush ? uglify : leftAlign)
