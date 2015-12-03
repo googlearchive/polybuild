@@ -40,9 +40,12 @@ module.exports = function(opts) {
   opts = opts || {};
   var crush = opts.maximumCrush;
   
-  var suffix = opts.suffix ? '.' + opts.suffix.split('.').join('') : '.build';
-  if(opts.suffix === false || opts.suffix === ""){ //no suffix option
+  var suffix = '.build'; //true || undefined
+
+  if (opts.suffix === false || opts.suffix === ""){
     suffix = "";
+  } else if (typeof opts.suffix === 'string') {
+    suffix = '.' + opts.suffix.split('.').join('');
   }
   
   var pipe = htmlPipe
