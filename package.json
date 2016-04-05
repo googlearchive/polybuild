@@ -17,7 +17,7 @@
     "gulp-vulcanize": "^6.1.0",
     "lazypipe": "^1.0.1",
     "nopt": "^3.0.6",
-    "polyclean": "^1.2.0",
+    "polyclean": "PolymerLabs/polyclean#es6",
     "vinyl-fs": "^2.2.1"
   },
   "directories": {
