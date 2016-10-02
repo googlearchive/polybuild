@@ -1,3 +1,9 @@
+# polybuild is deprecated!
+
+## Please use the [Polymer CLI](https://www.polymer-project.org/1.0/docs/tools/polymer-cli) or [polymer-build](https://github.com/Polymer/polymer-build) instead.
+
+----
+
 # Polybuild
 > An all-in-one build tool for Polymer apps
 
