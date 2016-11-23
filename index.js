@@ -24,7 +24,8 @@ var htmlPipe = lazypipe()
   .pipe(vulcanize, {
     inlineScripts: true,
     inlineCss: true,
-    stripComments: true
+    stripComments: true 
+    stripCss;true
   })
   // remove whitespace from inline css
   .pipe(polyclean.cleanCss)
