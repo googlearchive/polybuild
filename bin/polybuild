@@ -22,14 +22,14 @@ var args = nopt(
   {
     'maximum-crush': Boolean,
     'suffix': String,
-		'excludes': Array,
-		'strip-excludes': Array
+    'excludes': Array,
+    'strip-excludes': Array
   },
   {
     'mc': ['--maximum-crush'],
     's': ['--suffix'],
-		'e': ['--excludes'],
-		'se': ['--strip-excludes']
+    'e': ['--excludes'],
+    'se': ['--strip-excludes']
   }
 );
 
