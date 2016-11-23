@@ -21,16 +21,22 @@ var gutil = require('gulp-util');
 var args = nopt(
   {
     'maximum-crush': Boolean,
-    'suffix': String
+    'suffix': String,
+		'excludes': Array,
+		'strip-excludes': Array
   },
   {
     'mc': ['--maximum-crush'],
-    's': ['--suffix']
+    's': ['--suffix'],
+		'e': ['--excludes'],
+		'se': ['--strip-excludes']
   }
 );
 
 var maximumCrush = args['maximum-crush'];
 var suffix = args['suffix'];
+var excludes = args['excludes'];
+var stripExcludes = args['strip-excludes'];
 var source = args.argv.remain[0];
 
 if (!source) {
@@ -38,7 +44,7 @@ if (!source) {
 }
 
 vfs.src([source])
-  .pipe(polybuild({maximumCrush: maximumCrush, suffix: suffix}))
+  .pipe(polybuild({maximumCrush: maximumCrush, suffix: suffix, excludes: excludes, stripExcludes: stripExcludes}))
   .pipe(vfs.dest(
     path.dirname(source)
   ))

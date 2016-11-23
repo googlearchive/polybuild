@@ -18,18 +18,6 @@ var rename = require('gulp-rename');
 var vulcanize = require('gulp-vulcanize');
 var gutil = require('gulp-util');
 
-var htmlPipe = lazypipe()
-  // inline html imports, scripts and css
-  // also remove html comments
-  .pipe(vulcanize, {
-    inlineScripts: true,
-    inlineCss: true,
-    stripComments: true
-  })
-  // remove whitespace from inline css
-  .pipe(polyclean.cleanCss)
-;
-
 // remove javascript whitespace
 var leftAlign = polyclean.leftAlignJs;
 
@@ -37,34 +25,48 @@ var leftAlign = polyclean.leftAlignJs;
 var uglify = polyclean.uglifyJs;
 
 module.exports = function(opts) {
-  opts = opts || {};
-  var crush = opts.maximumCrush;
-  
-  var suffix = '.build'; //true || undefined
+	opts = opts || {};
+	var crush = opts.maximumCrush;
 
-  if (opts.suffix === false || opts.suffix === ""){
-    suffix = "";
-  } else if (typeof opts.suffix === 'string') {
-    suffix = '.' + opts.suffix.split('.').join('');
-  }
-  
-  var pipe = htmlPipe
-  // switch between cleaning or minimizing javascript
-  .pipe(crush ? uglify : leftAlign)
-  // rename files with an infix '.build'
-  .pipe(rename, function(path) {
-    path.basename += suffix;
-  })
-  // split the javascript out into `.build.js` for CSP compliance
-  .pipe(crisper)
-  ()
-  ;
+	var suffix = '.build'; //true || undefined
 
-  // have to handle errors ourselves, thanks gulp >:(
-  pipe.on('error', function(error) {
-    gutil.log(error.toString());
-    process.exit(1);
-  });
+	if (opts.suffix === false || opts.suffix === ""){
+		suffix = "";
+	} else if (typeof opts.suffix === 'string') {
+		suffix = '.' + opts.suffix.split('.').join('');
+	}
 
-  return pipe;
+	var htmlPipe = lazypipe()
+	// inline html imports, scripts and css
+	// also remove html comments
+	.pipe(vulcanize, {
+		inlineScripts: true,
+		inlineCss: true,
+		stripComments: true,
+		excludes: (opts.excludes ? opts.excludes : []),
+		stripExcludes: (opts.stripExcludes ? opts.stripExcludes : [])
+	})
+	// remove whitespace from inline css
+	.pipe(polyclean.cleanCss)
+	;
+
+	var pipe = htmlPipe
+	// switch between cleaning or minimizing javascript
+	.pipe(crush ? uglify : leftAlign)
+	// rename files with an infix '.build'
+	.pipe(rename, function(path) {
+		path.basename += suffix;
+	})
+	// split the javascript out into `.build.js` for CSP compliance
+	.pipe(crisper)
+	()
+	;
+
+	// have to handle errors ourselves, thanks gulp >:(
+	pipe.on('error', function(error) {
+		gutil.log(error.toString());
+		process.exit(1);
+	});
+
+	return pipe;
 };
